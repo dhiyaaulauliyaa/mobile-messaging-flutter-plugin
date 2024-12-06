@@ -35,7 +35,8 @@ dependencies {
     //flutter and mm dependencies clash
     implementation ("org.jetbrains.kotlin:kotlin-stdlib-jdk8") {
         version {
-            strictly "1.8.10"
+            // strictly "1.8.10"
+            strictly "1.9.24"
         }
     }
     implementation ("com.infobip:infobip-mobile-messaging-android-sdk:$mmVersion@aar") {
