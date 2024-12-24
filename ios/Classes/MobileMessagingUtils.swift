@@ -2,9 +2,9 @@ import Foundation
 import MobileMessaging
 
 extension MM_MTMessage {
-    override func dictionary() -> [String: Any] {
-        return self.dictionaryRepresentation
-    }
+    // override func dictionary() -> [String: Any] {
+    //     return self.dictionaryRepresentation
+    // }
 }
 
 extension MMBaseMessage {
