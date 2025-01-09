@@ -103,9 +103,9 @@ public class InitHelper {
 
         builder.withDisplayNotification(notificationBuilder.build());
 
-        if (androidSettings != null && androidSettings.firebaseOptions != null) {
-            builder.withFirebaseOptions(androidSettings.firebaseOptions);
-        }
+        // if (androidSettings != null && androidSettings.firebaseOptions != null) {
+        //     builder.withFirebaseOptions(androidSettings.firebaseOptions);
+        // }
 
         return builder;
     }

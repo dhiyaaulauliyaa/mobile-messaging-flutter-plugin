@@ -1,6 +1,6 @@
 package org.infobip.plugins.mobilemessaging.flutter.common;
 
-import com.google.firebase.FirebaseOptions;
+// import com.google.firebase.FirebaseOptions;
 
 import java.util.List;
 
@@ -33,7 +33,7 @@ public class Configuration {
         String notificationIcon;
         boolean multipleNotifications;
         String notificationAccentColor;
-        FirebaseOptions firebaseOptions;
+        // FirebaseOptions firebaseOptions;
 
         public String getNotificationIcon() {
             return notificationIcon;
@@ -59,13 +59,13 @@ public class Configuration {
             this.notificationAccentColor = notificationAccentColor;
         }
 
-        public FirebaseOptions getFirebaseOptions() {
-            return firebaseOptions;
-        }
+        // public FirebaseOptions getFirebaseOptions() {
+        //     return firebaseOptions;
+        // }
 
-        public void setFirebaseOptions(FirebaseOptions firebaseOptions) {
-            this.firebaseOptions = firebaseOptions;
-        }
+        // public void setFirebaseOptions(FirebaseOptions firebaseOptions) {
+        //     this.firebaseOptions = firebaseOptions;
+        // }
     }
 
     public static class PrivacySettings {
