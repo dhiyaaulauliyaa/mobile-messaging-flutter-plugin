@@ -6,6 +6,18 @@ version '1.0'
 
 def withWebRTCUI = getRootProjectProperty('withWebRTCUI', false)
 
+def dartEnvironmentVariables = []
+
+if (project.hasProperty('dart-defines')) {
+    dartEnvironmentVariables = project.property('dart-defines')
+        .split(',')
+        .collectEntries { entry ->
+            def pair = new String(entry.decodeBase64(), 'UTF-8').split('=')
+            [(pair.first()): pair.last()]
+        }
+}
+def isHmsBuild = dartEnvironmentVariables.PLATFORM == 'huawei'
+
 rootProject.allprojects {
     repositories {
         google()
@@ -31,7 +43,10 @@ android {
 }
 
 dependencies {
-    def mmVersion = '13.4.0'
+    def mmHmsVersion = '6.9.0'
+    def mmFcmVersion = '13.4.0'
+
+    // def mmVersion = '13.4.0'
     //flutter and mm dependencies clash
     implementation ("org.jetbrains.kotlin:kotlin-stdlib-jdk8") {
         version {
@@ -39,17 +54,32 @@ dependencies {
             strictly "1.9.24"
         }
     }
-    implementation ("com.infobip:infobip-mobile-messaging-android-sdk:$mmVersion@aar") {
-        transitive = true
+
+    /* Infobip Huawei Package */
+    if (isHmsBuild){
+        implementation "com.infobip:infobip-mobile-messaging-huawei-chat-sdk:$mmHmsVersion@aar"
+        implementation "com.infobip:infobip-mobile-messaging-huawei-inbox-sdk:$mmHmsVersion@aar"
+        implementation ("com.infobip:infobip-mobile-messaging-huawei-sdk:$mmHmsVersion@aar") {
+            transitive = true
+        }
+    } 
+    
+    /* Infobip Android Package */
+    else {
+        implementation "com.infobip:infobip-mobile-messaging-android-chat-sdk:$mmFcmVersion@aar"
+        implementation "com.infobip:infobip-mobile-messaging-android-inbox-sdk:$mmFcmVersion@aar"
+        implementation ("com.infobip:infobip-mobile-messaging-android-sdk:$mmFcmVersion@aar") {
+            transitive = true
+        }
     }
-    implementation "com.infobip:infobip-mobile-messaging-android-resources:$mmVersion@aar"
-    implementation "com.infobip:infobip-mobile-messaging-android-chat-sdk:$mmVersion@aar"
-    implementation "com.infobip:infobip-mobile-messaging-android-inbox-sdk:$mmVersion@aar"
+    // implementation "com.infobip:infobip-mobile-messaging-android-resources:$mmFcmVersion@aar"
+
     if (withWebRTCUI.toBoolean()) {
         implementation implementation("com.infobip:infobip-rtc-ui:$mmVersion") {
             transitive = true
         }
     }
+    
     implementation 'androidx.core:core:1.10.1'
     implementation 'androidx.exifinterface:exifinterface:1.3.6'
     implementation 'androidx.databinding:viewbinding:8.0.2'

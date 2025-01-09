@@ -366,10 +366,14 @@ public class InfobipMobilemessagingPlugin implements FlutterPlugin, MethodCallHa
             } else if (InAppChatEvent.CHAT_VIEW_CHANGED.getKey().equals(intent.getAction())) {
                 data = intent.getStringExtra(BroadcastParameter.EXTRA_CHAT_VIEW);
                 broadcastHandler.sendEvent(event, data);
-            } else if (InAppChatEvent.LIVECHAT_REGISTRATION_ID_UPDATED.getKey().equals(intent.getAction())) {
-                data = intent.getStringExtra(BroadcastParameter.EXTRA_LIVECHAT_REGISTRATION_ID);
-                broadcastHandler.sendEvent(event, data);
-            } else if (InAppChatEvent.UNREAD_MESSAGES_COUNTER_UPDATED.getKey().equals(intent.getAction())) {
+            } 
+            
+            // else if (InAppChatEvent.LIVECHAT_REGISTRATION_ID_UPDATED.getKey().equals(intent.getAction())) {
+            //     data = intent.getStringExtra(BroadcastParameter.EXTRA_LIVECHAT_REGISTRATION_ID);
+            //     broadcastHandler.sendEvent(event, data);
+            // } 
+            
+            else if (InAppChatEvent.UNREAD_MESSAGES_COUNTER_UPDATED.getKey().equals(intent.getAction())) {
                 int unreadMessagesCount = intent.getIntExtra(BroadcastParameter.EXTRA_UNREAD_CHAT_MESSAGES_COUNT, 0);
                 data = String.valueOf(unreadMessagesCount);
                 broadcastHandler.sendEvent(event, data);
